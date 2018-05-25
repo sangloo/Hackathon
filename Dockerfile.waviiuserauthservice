@@ -1,0 +1,18 @@
+FROM golang:1.9
+
+WORKDIR /go/src/github.com/goProjects/WaviiMicroServices
+COPY . .
+WORKDIR WaviiUserAuthService
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o WaviiUserAuthService
+
+FROM scratch
+
+COPY --from=0 /go/src/github.com/goProjects/WaviiMicroServices/WaviiUserAuthService/WaviiUserAuthService /WaviiUserAuthService
+COPY --from=0 /go/src/github.com/goProjects/WaviiMicroServices/WaviiLib /WaviiLib
+COPY --from=0 /go/src/github.com/goProjects/WaviiMicroServices/WaviiLib/keys/tlskeys/zoneinfo.tar.gz /
+ADD https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt /etc/ssl/certs/
+
+ENV LISTEN_URL=0.0.0.0:3030
+EXPOSE 3030
+
+CMD ["/WaviiUserAuthService"]
