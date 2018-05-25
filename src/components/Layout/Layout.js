@@ -7,7 +7,7 @@ import styled, { keyframes, css } from 'styled-components';
 import Errorutil from '../Errorutil';
 
 const Layout = ({ mainstore, children }) => {
-	const { errorCount, toggleErrorsView, flash, isConnectedServer } = mainstore;
+	const { errorCount, toggleErrorsView, flash } = mainstore;
 
 	const toggleErrors = () => toggleErrorsView();
 
@@ -17,10 +17,7 @@ const Layout = ({ mainstore, children }) => {
 
 			<FooterContainer>
 				<Sectioncontainer>
-					<FooterSpan>
-						<Square color={isConnectedServer ? 'green' : 'red'} />{' '}
-						{isConnectedServer ? 'Server is alive' : 'Server is out'}
-					</FooterSpan>
+					<FooterSpan />
 				</Sectioncontainer>
 				<ContainerFuncs>
 					<ErrorContainerShowHide animate={flash} onClick={toggleErrors}>
@@ -46,14 +43,6 @@ export default inject('mainstore')(observer(Layout));
 
 const LayoutSection = styled(Flex)`
 	background-color: white;
-`;
-
-const Square = styled.div`
-	width: 10px;
-	height: 10px;
-	background-color: ${props => props.color};
-	margin-left: 10px;
-	margin-right: 10px;
 `;
 
 const FooterContainer = styled.div`

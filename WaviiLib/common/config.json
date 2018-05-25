@@ -1,9 +1,0 @@
-{
-	"Server": "0.0.0.0:3030",
-	"MongoDBHost": "127.0.0.1",
-	"MongoDBUser": "",
-	"MongoDBPwd": "",
-	"Database": "hackathon",
-	"LogLevel": 1,
-	"DomainName": "localhost:3030"
-}
